@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class ListingResource extends JsonResource
 {
@@ -45,10 +46,15 @@ class ListingResource extends JsonResource
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'thumbnail' => $this->thumbnail,
+            'images' => $this->getUrl(),
+            'media' => $this->getMediaItems(),
             'rating' => (float) $this->averageRating(),
-            'price' => '$' . $this->price,
+            'reviews' => $this->ratings()->with('user')->get(),
+            'price' =>  $this->price,
             'user_id' => $this->user_id,
+            'user' => $this->user,
             'category' => $this->category->name,
+            'category_id' => $this->category_id,
             'is_featured' => $this->is_featured,
             'is_active' => $this->is_active,
             'created_at' => $this->created_at,

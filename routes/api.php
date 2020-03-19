@@ -35,5 +35,12 @@ Route::group([
 // Route::get('listings/{id}', 'Api\ListingController@show');
 // Route::post('listings', 'Api\ListingController@store');
 
+Route::get('listings/search', 'Api\ListingController@search')->name('listings.seach');
+Route::delete('listings/{listing}/remove-file/{id}', 'Api\ListingController@removeFile')->name('listings.removefile');
+Route::get('listings/user-listings', 'Api\ListingController@user_listings')->name('listings.userlistings');
+Route::get('listings/locations', 'Api\ListingController@locations')->name('listings.locations');
 Route::resource('listings', 'Api\ListingController')->only(['index', 'show', 'store']);
+Route::post('listings/{listing}', 'Api\ListingController@update')->name('listings.update');
+Route::post('listings/{listing}/ratings', 'Api\ListingController@ratings')->name('ratings.save');
+Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index']);

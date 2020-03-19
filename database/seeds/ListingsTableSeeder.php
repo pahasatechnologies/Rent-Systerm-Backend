@@ -348,27 +348,47 @@ class ListingsTableSeeder extends Seeder
         DB::table('listings')->delete();
 
         $data = json_decode($propertyJsonData);
+        $i = 0;
         foreach ($data as $obj) {
+            // for (let i = 0; i < 20; i++) {
+            //   if (i % 2 === 0) {
+            //     points.push({
+            //       latitude: 30.705080 + i * 0.001,
+            //       longitude: 76.762020 + i * 0.001
+            //     });
+            //   } else {
+            //     points.push({
+            //       latitude: 30.705080 - i * 0.002,
+            //       longitude: 76.762020 + i * 0.001
+            //     });
+            //   }
+            // }
+
+            $latitude = 30.705080 + $i * 0.001;
+            $longitude = 76.762020 + $i * 0.001;
+
             $rating = new willvincent\Rateable\Rating;
             $rating->rating = rand(1,5);
             $rating->user_id = 1;
+            $rating->review = "Test...";
             $listing = App\Listing::create(array(
                 'id' => $obj->id,
                 'title' => $obj->title,
                 'addressLineOne'  => $obj->address,
                 'addressLineTwo'  => '',
-                'city'  => 'Toronto',
-                'state'  => 'Toronto',
-                'country'  => 'Cananda',
+                'city'  => 'Chandigarh',
+                'state'  => 'Chandigarh',
+                'country'  => 'India',
                 'pincode'  => 12121,
-                'latitude'  => $obj->latitude,
-                'longitude'  => $obj->longitude,
-                'thumbnail'  => $obj->thumbnail,
+                'latitude'  =>  $latitude,
+                'longitude'  => $longitude,
+                // 'thumbnail'  => $obj->thumbnail,
                 'price'  => $obj->price && $obj->price!= 'false'? (float)$obj->price: 0,
                 'user_id'  => App\User::where('role', 'landlord')->pluck('id')->random(),
                 'category_id' => App\Category::pluck('id')->random()
             ));
             $listing->ratings()->save($rating);
+            $i = $i + 1;
         }
     }
 }
