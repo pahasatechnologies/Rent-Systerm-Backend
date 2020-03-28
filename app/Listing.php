@@ -42,6 +42,15 @@ class Listing extends Model implements HasMedia
         return $this->belongsTo('App\Category');
     }
 
+    public function bookmarks()
+    {
+        return $this->belongsToMany('App\User', 'bookmarks');
+    }
+
+    public function is_bookmarked(User $user){
+        return $this->bookmarks->contains($user);
+    }
+
     public function getPath(){
         $paths = [];
         $this->getMedia()->each(function ($image) {
@@ -75,7 +84,5 @@ class Listing extends Model implements HasMedia
             ];
 
         });
-
-        return $paths;
     }
 }

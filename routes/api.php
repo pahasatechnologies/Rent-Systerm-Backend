@@ -35,12 +35,17 @@ Route::group([
 // Route::get('listings/{id}', 'Api\ListingController@show');
 // Route::post('listings', 'Api\ListingController@store');
 
+Route::get('listings/latest_data', 'Api\ListingController@latest')->name('listing.latest');
 Route::get('listings/search', 'Api\ListingController@search')->name('listings.seach');
 Route::delete('listings/{listing}/remove-file/{id}', 'Api\ListingController@removeFile')->name('listings.removefile');
 Route::get('listings/user-listings', 'Api\ListingController@user_listings')->name('listings.userlistings');
 Route::get('listings/locations', 'Api\ListingController@locations')->name('listings.locations');
-Route::resource('listings', 'Api\ListingController')->only(['index', 'show', 'store']);
+Route::resource('listings', 'Api\ListingController')->only(['index', 'show', 'store', 'destroy']);
 Route::post('listings/{listing}', 'Api\ListingController@update')->name('listings.update');
 Route::post('listings/{listing}/ratings', 'Api\ListingController@ratings')->name('ratings.save');
+Route::get('listings/bookmarks/list', 'Api\ListingController@get_bookmarks')->name('ratings.get_bookmarks');
+Route::get('listings/{listing}/is_bookmarked', 'Api\ListingController@is_bookmarked')->name('ratings.is_bookmarked');
+Route::post('listings/{listing}/bookmarks/add', 'Api\ListingController@add_bookmark')->name('ratings.add_bookmark');
+Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index']);

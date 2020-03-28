@@ -59,6 +59,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Listing');
     }
 
+    public function bookmarks(){
+        return $this->belongsToMany('App\Listing','bookmarks');
+    }
+
     public  function  getJWTIdentifier()
     {
         return  $this->getKey();
