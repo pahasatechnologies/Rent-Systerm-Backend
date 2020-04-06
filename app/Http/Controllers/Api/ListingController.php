@@ -33,6 +33,8 @@ class ListingController extends Controller
     public function index(Request $request)
     {
         $query = Listing::query();
+        $paginationCount = $this->paginateCount;
+
         if ($request->query('location')) {
             $query = $query->where('state', $request->query('location'));
         }
@@ -41,7 +43,11 @@ class ListingController extends Controller
             $query = $query->where('category_id', $request->query('category'));
         }
 
-        $results = $query->paginate($this->paginateCount);
+        if ($request->query('count')) {
+            $paginationCount =  $request->query('count');
+        }
+
+        $results = $query->paginate($paginationCount);
 
         return response()->json(ListingResource::collection($results));
         // return response()->json(ListingResource::collection(Listing::paginate($this->paginateCount)));
