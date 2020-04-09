@@ -49,3 +49,14 @@ Route::post('listings/{listing}/bookmarks/add', 'Api\ListingController@add_bookm
 Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index']);
+
+
+Route::group([
+    'prefix' => 'admin',
+], function ($router) {
+    Route::get('dashboard', 'Api\AdminController@dashboard');
+    Route::get('listings', 'Api\AdminController@listings');
+    Route::get('users', 'Api\AdminController@users');
+    Route::get('listings/user-listings/{user}', 'Api\AdminController@user_listings');
+});;
+

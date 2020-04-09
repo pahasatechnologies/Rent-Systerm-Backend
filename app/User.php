@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use  Tymon\JWTAuth\Contracts\JWTSubject;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -23,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name', 'email', 'phone', 'image', 'password', 'role'
+        'first_name', 'last_name', 'email', 'phone', 'image', 'password', 'role',
     ];
 
     /**
@@ -59,16 +58,27 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Listing');
     }
 
-    public function bookmarks(){
-        return $this->belongsToMany('App\Listing','bookmarks');
+    public function bookmarks()
+    {
+        return $this->belongsToMany('App\Listing', 'bookmarks');
     }
 
-    public  function  getJWTIdentifier()
+    public function getJWTIdentifier()
     {
-        return  $this->getKey();
+        return $this->getKey();
     }
-    public  function  getJWTCustomClaims()
+    public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role == self::ROLES['ADMIN']) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
