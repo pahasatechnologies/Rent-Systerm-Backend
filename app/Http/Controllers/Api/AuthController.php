@@ -70,7 +70,7 @@ class AuthController extends Controller
         }
         $credentials = $request->only(['email', 'password']);
         if (!$token = auth('api')->attempt($credentials)) {
-            return response()->json(['data' => 'Invalid email or password', ], 400);
+            return response()->json(['data' => 'Invalid email or password'], 400);
         }
         $current_user = User::find(auth('api')->user()->id); //$request->email;
 
@@ -82,7 +82,12 @@ class AuthController extends Controller
                 'expires_in' => auth('api')->factory()->getTTL() * 60,
             ], 200);
         } else {
-            return response()->json(['data' => 'Email is not verified'], Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response()->json([
+                'data' => 'Email is not verified',
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth('api')->factory()->getTTL() * 60,
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
     }
@@ -104,7 +109,7 @@ class AuthController extends Controller
     {
         auth()->logout(true); // Force token to blacklist
         return response()->json(['success' => 'Logged out
-         Successfully.', ], 200);
+         Successfully.'], 200);
     }
     /**
      * Refresh a token.

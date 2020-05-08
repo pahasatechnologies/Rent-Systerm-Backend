@@ -58,7 +58,7 @@ class VerificationController extends Controller
         $request->user()->sendEmailVerificationNotification();
 
         if ($request->wantsJson()) {
-            return response(['message' => 'Email Sent']);
+            return response(['message' => 'Email sent successfully']);
         }
 
         return back()->with('resent', true);
@@ -91,7 +91,7 @@ class VerificationController extends Controller
             event(new Verified($request->user()));
         }
 
-        return response(['message'=>'Successfully verified']);
+        return response(['message'=>'Email verified successfully']);
 
     }
 
