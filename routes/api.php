@@ -18,9 +18,28 @@ Route::group([
     Route::post('register', 'Api\AuthController@register');
     Route::post('logout', 'Api\AuthController@logout');
     Route::post('refresh', 'Api\AuthController@refresh');
+    // Route::post('forgot-password-reset', 'Auth\ResetPasswordController@reset');
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    // Email Verification Routes...
+    // Route::post('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+    // Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+    // Route::post('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+});
+
+
+// Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
+// Route::post('password/reset', 'Api\ResetPasswordController@reset');
+
+Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Api\ResetPasswordController@resetPassword');
+Route::get('email/resend', 'Api\VerificationController@resend')->name('verification.resend');
+Route::get('email/verify/{id}/{hash}', 'Api\VerificationController@verify')->name('verification.verify');
+
 Route::group([
     'prefix' => 'profile',
+    'middleware' => 'verified'
 ], function ($router) {
     Route::get('me', 'Api\AuthController@me');
     Route::get('profile', 'Api\ProfileController@index');
