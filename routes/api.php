@@ -74,6 +74,7 @@ Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remo
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index']);
 
+Route::post('subscriptions/create', 'Api\SubscribersController@create')->name('Subscribers.create');
 
 Route::group([
     'prefix' => 'admin',
