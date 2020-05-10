@@ -52,7 +52,7 @@ class VerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
 
-            return response(['message'=>'Already verified']);
+            return response(['message'=>'Email already verified']);
         }
 
         $request->user()->sendEmailVerificationNotification();
@@ -82,7 +82,7 @@ class VerificationController extends Controller
 
         if ($request->user()->hasVerifiedEmail()) {
 
-            return response(['message'=>'Already verified']);
+            return response(['message'=>'Email already verified']);
 
             // return redirect($this->redirectPath());
         }

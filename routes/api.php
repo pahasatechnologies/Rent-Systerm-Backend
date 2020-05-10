@@ -34,8 +34,13 @@ Route::middleware(['auth:api'])->group(function () {
 
 Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Api\ResetPasswordController@resetPassword');
+// Route::get('email/resend', 'Api\VerificationController@resend')->name('verification.resend');
+// Route::get('email/verify/{id}/{hash}', 'Api\VerificationController@verify')->name('verification.verify');
+
+// Email Verification Routes...
+Route::get('email/verify', 'Api\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Api\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Api\VerificationController@resend')->name('verification.resend');
-Route::get('email/verify/{id}/{hash}', 'Api\VerificationController@verify')->name('verification.verify');
 
 Route::group([
     'prefix' => 'profile',

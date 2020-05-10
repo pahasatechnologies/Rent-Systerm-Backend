@@ -43,8 +43,10 @@ class AuthController extends Controller
             'role' => $request->role,
         ]);
         // $token = auth('api')->login($user);
+        $user->sendApiEmailVerificationNotification();
+        $message = ('We just sent you the verification link at your email ('.$user->email.') again, please check it.');
         return response()->json([
-            'data' => 'Please check your inbox for verification link',
+            'data' => $message,
         ], Response::HTTP_OK);
         // return  response()->json([
         //     'access_token' => $token,

@@ -28,6 +28,7 @@ class VerifyEmail extends VerifyEmailBase
             'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
         );
 
+        // I use urlencode to pass a link to my frontend.
         return $prefix . urlencode($temporarySignedURL);
     }
 }
