@@ -81,6 +81,9 @@ Route::group([
 ], function ($router) {
     Route::get('dashboard', 'Api\AdminController@dashboard');
     Route::get('listings', 'Api\AdminController@listings');
+    Route::get('subscribers', 'Api\SubscribersController@subscribers');
+    Route::post('subscribers/{subscriber}', 'Api\SubscribersController@change_status');
+    Route::delete('subscribers/{subscriber}', 'Api\SubscribersController@remove_subscriber');
     Route::get('users', 'Api\AdminController@users');
     Route::get('listings/user-listings/{user}', 'Api\AdminController@user_listings');
 });;
