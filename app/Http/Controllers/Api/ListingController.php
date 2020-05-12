@@ -47,6 +47,9 @@ class ListingController extends Controller
             $paginationCount =  $request->query('count');
         }
 
+        $query->orderBy('updated_at', 'DESC')
+            ->orderBy('created_at', 'DESC');
+
         $results = $query->paginate($paginationCount);
 
         return response()->json(ListingResource::collection($results));
@@ -102,7 +105,6 @@ class ListingController extends Controller
         $results = $query->paginate($this->paginateCount);
 
         return response()->json(ListingResource::collection($results));
-
     }
 
     public function user_listings()
@@ -130,7 +132,6 @@ class ListingController extends Controller
         $rating->review = $request->get('review');
         //  dd($listing);
         return response()->json($listing->ratings()->save($rating), 200);
-
     }
 
     public function store(ListingRequest $request)
@@ -176,7 +177,6 @@ class ListingController extends Controller
         }
 
         return response()->json($listing, 201);
-
     }
 
     public function update(ListingRequest $request, Listing $listing)
