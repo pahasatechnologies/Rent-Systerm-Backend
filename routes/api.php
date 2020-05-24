@@ -70,6 +70,8 @@ Route::post('listings/{listing}/ratings', 'Api\ListingController@ratings')->name
 Route::get('listings/bookmarks/list', 'Api\ListingController@get_bookmarks')->name('ratings.get_bookmarks');
 Route::get('listings/{listing}/is_bookmarked', 'Api\ListingController@is_bookmarked')->name('ratings.is_bookmarked');
 Route::post('listings/{listing}/bookmarks/add', 'Api\ListingController@add_bookmark')->name('ratings.add_bookmark');
+Route::post('listings/{listing}/set-featured', 'Api\ListingController@setFeatured')->name('listings.set_featured');
+Route::post('listings/{listing}/set-status', 'Api\ListingController@setActiveStatus')->name('listings.set_status');
 Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index', 'store', 'destroy']);

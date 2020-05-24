@@ -217,6 +217,22 @@ class ListingController extends Controller
         return response()->json($listing, 200);
     }
 
+    public function setFeatured(Listing $listing,Request $request)
+    {
+        $status = $request->get('status');
+        $listing->is_featured = $status;
+        $listing->save();
+        return response()->json($listing, 200);
+    }
+
+    public function setActiveStatus(Listing $listing,Request $request)
+    {
+        $status = $request->get('status');
+        $listing->is_active = $status;
+        $listing->save();
+        return response()->json($listing, 200);
+    }
+
     public function removeFile(Listing $listing, $id)
     {
         // $validatedData = $request->all();
