@@ -72,7 +72,8 @@ Route::get('listings/{listing}/is_bookmarked', 'Api\ListingController@is_bookmar
 Route::post('listings/{listing}/bookmarks/add', 'Api\ListingController@add_bookmark')->name('ratings.add_bookmark');
 Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
-Route::resource('categories', 'Api\CategoryController')->only(['index']);
+Route::resource('categories', 'Api\CategoryController')->only(['index', 'store', 'destroy']);
+Route::post('categories/{category}', 'Api\CategoryController@update')->name('categories.update');
 
 Route::post('subscriptions/create', 'Api\SubscribersController@create')->name('Subscribers.create');
 
