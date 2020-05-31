@@ -47,16 +47,17 @@ class AdminController extends Controller
         // return response()->json(ListingResource::collection(Listing::paginate($this->paginateCount)));
     }
 
-    public function dashboard(Request $request) {
-            $userCount = User::count();
-            $listingCount = Listing::count();
+    public function dashboard(Request $request)
+    {
+        $userCount = User::count();
+        $listingCount = Listing::count();
 
-            // $latestListings = Listing::latest()->take(5)->get();
+        // $latestListings = Listing::latest()->take(5)->get();
 
-            $query = Listing::latest()->take(4)->get();
-            $latestListings = ListingResource::collection($query);
+        $query = Listing::latest()->take(4)->get();
+        $latestListings = ListingResource::collection($query);
 
-            return response()->json(compact(['userCount', 'listingCount', 'latestListings']));
+        return response()->json(compact(['userCount', 'listingCount', 'latestListings']));
     }
 
     public function users(Request $request)
@@ -82,4 +83,21 @@ class AdminController extends Controller
         return response()->json(ListingResource::collection($results));
     }
 
+    public function users_search(Request $request)
+    {
+        $term = $request->query('term');
+        $query = User::where('first_name', 'LIKE', "%$term%")
+            ->orWhere('last_name', 'LIKE', "%$term%");
+
+        return response()->json($query->get());
+        // return response()->json(ListingResource::collection(Listing::paginate($this->paginateCount)));
+    }
+
+    public function change_user(Listing $listing, Request $request) {
+        $user_id = $request->get('id');
+        $listing->user_id = $user_id;
+        $listing->save();
+
+        return response()->json($listing, 200);
+    }
 }

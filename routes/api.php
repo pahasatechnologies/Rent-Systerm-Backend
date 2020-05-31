@@ -74,8 +74,7 @@ Route::post('listings/{listing}/set-featured', 'Api\ListingController@setFeature
 Route::post('listings/{listing}/set-status', 'Api\ListingController@setActiveStatus')->name('listings.set_status');
 Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
-Route::resource('categories', 'Api\CategoryController')->only(['index', 'store', 'destroy']);
-Route::post('categories/{category}', 'Api\CategoryController@update')->name('categories.update');
+Route::resource('categories', 'Api\CategoryController')->only(['index', 'store', 'update', 'destroy']);
 
 Route::post('subscriptions/create', 'Api\SubscribersController@create')->name('Subscribers.create');
 
@@ -88,6 +87,8 @@ Route::group([
     Route::post('subscribers/{subscriber}', 'Api\SubscribersController@change_status');
     Route::delete('subscribers/{subscriber}', 'Api\SubscribersController@remove_subscriber');
     Route::get('users', 'Api\AdminController@users');
+    Route::get('users/search', 'Api\AdminController@users_search');
     Route::get('listings/user-listings/{user}', 'Api\AdminController@user_listings');
+    Route::put('listings/{listing}/change-user', 'Api\AdminController@change_user');
 });;
 
