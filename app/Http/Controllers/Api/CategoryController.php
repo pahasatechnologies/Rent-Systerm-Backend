@@ -16,7 +16,13 @@ class CategoryController extends Controller
         return response()->json(CategoryResource::collection($categories));
     }
 
-    public function store(CategoryRequest $request) {
+    public function show($id)
+    {
+        return response()->json(new CategoryResource(Category::findOrFail($id)));
+    }
+
+    public function store(CategoryRequest $request)
+    {
         $validatedData = $request->all();
 
         $category = Category::create($validatedData);
@@ -24,7 +30,8 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
 
-    public function update(CategoryRequest $request, Category $category) {
+    public function update(CategoryRequest $request, Category $category)
+    {
         $validatedData = $request->all();
 
         $category = tap($category)->update($validatedData);

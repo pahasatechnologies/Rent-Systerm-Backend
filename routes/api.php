@@ -74,7 +74,7 @@ Route::post('listings/{listing}/set-featured', 'Api\ListingController@setFeature
 Route::post('listings/{listing}/set-status', 'Api\ListingController@setActiveStatus')->name('listings.set_status');
 Route::delete('listings/{listing}/bookmarks/remove', 'Api\ListingController@remove_bookmark')->name('ratings.remove_bookmark');
 Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
-Route::resource('categories', 'Api\CategoryController')->only(['index', 'store', 'update', 'destroy']);
+Route::resource('categories', 'Api\CategoryController')->only(['index', 'show', 'store', 'update', 'destroy']);
 
 Route::post('subscriptions/create', 'Api\SubscribersController@create')->name('Subscribers.create');
 
