@@ -77,6 +77,7 @@ Route::resource('ratings', 'Api\RatingController')->only(['destroy', 'update']);
 Route::resource('categories', 'Api\CategoryController')->only(['index', 'show', 'store', 'update', 'destroy']);
 
 Route::post('subscriptions/create', 'Api\SubscribersController@create')->name('Subscribers.create');
+Route::post('contact-us', 'Api\ContactController@sendMail');
 
 Route::group([
     'prefix' => 'admin',

@@ -50,7 +50,7 @@ class ListingResource extends JsonResource
             'media' => $this->getMediaItems(),
             'rating' => (float) $this->averageRating(),
             'reviews' => $this->ratings()->with('user')->get(),
-            'price' =>  $this->price,
+            'price' =>  "₹ ".$this->price,
             'user_id' => $this->user_id,
             'user' => $this->user,
             'category' => $this->category->name,
