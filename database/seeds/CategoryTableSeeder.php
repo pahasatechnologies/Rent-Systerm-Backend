@@ -14,5 +14,7 @@ class CategoryTableSeeder extends Seeder
     {
         factory(App\Category::class)->states('residential')->create();
         factory(App\Category::class)->states('commercial')->create();
+        factory(App\Category::class)->states('residential-child')->create();
+        factory(App\Category::class)->states('commercial-child')->create();
     }
 }

@@ -22,6 +22,9 @@ class CreateListingsTable extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('pincode');
+            $table->string('bhk');
+            $table->string('furnishing');
+            $table->string('property_type');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
             $table->string('thumbnail')->nullable();

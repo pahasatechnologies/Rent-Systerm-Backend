@@ -12,7 +12,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(App\User::class)->states('admin')->create();
-        factory(App\User::class)->states('landlord')->create();
-        factory(App\User::class)->states('tenant')->create();
+        factory(App\User::class)->states('agent')->create();
+        factory(App\User::class)->states('owner')->create();
+        factory(App\User::class)->states('user')->create();
     }
 }

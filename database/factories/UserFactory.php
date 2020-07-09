@@ -46,26 +46,39 @@ $factory->state(User::class, 'admin', function (Faker $faker) {
     ];
 });
 
-$factory->state(User::class, 'landlord', function (Faker $faker) {
+$factory->state(User::class, 'agent', function (Faker $faker) {
     return [
-        'first_name' => 'Landlord',
+        'first_name' => 'Agent',
         'last_name' => 'Potter',
-        'email' => 'landlord@example.com',
+        'email' => 'agent@example.com',
         'phone' => '9111111111',
-        'role' => 'landlord',
+        'role' => 'agent',
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];
 });
 
-$factory->state(User::class, 'tenant', function (Faker $faker) {
+$factory->state(User::class, 'owner', function (Faker $faker) {
+    return [
+        'first_name' => 'Owner',
+        'last_name' => 'Potter',
+        'email' => 'owner@example.com',
+        'phone' => '9222222222',
+        'role' => 'owner',
+        'email_verified_at' => now(),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => Str::random(10),
+    ];
+});
+
+$factory->state(User::class, 'user', function (Faker $faker) {
     return [
         'first_name' => 'Admin',
         'last_name' => 'Potter',
-        'email' => 'tenant@example.com',
-        'phone' => '9222222222',
-        'role' => 'tenant',
+        'email' => 'user@example.com',
+        'phone' => '9333333333',
+        'role' => 'user',
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('image')->nullable();
-            $table->string('role')->default(App\User::ROLES['TENANT']);
+            $table->string('role')->default(App\User::ROLES['USER']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -15,8 +15,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     const ROLES = [
         'ADMIN' => 'admin',
-        'TENANT' => 'tenant',
-        'LANDLORD' => 'landlord',
+        'USER' => 'user',
+        'AGENT' => 'agent',
+        'OWNER' => 'owner',
     ];
 
     /**

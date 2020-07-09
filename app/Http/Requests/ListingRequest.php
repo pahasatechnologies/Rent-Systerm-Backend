@@ -35,6 +35,9 @@ class ListingRequest extends FormRequest
             'longitude' => 'required|numeric',
             'thumbnail' => '',
             'price' => 'required|numeric',
+            'bhk' => 'required',
+            'furnishing' => 'required',
+            'property_type' => 'required',
         ];
     }
 }

@@ -31,7 +31,7 @@ class ContactController extends Controller
         $contact->subject = $request->get('subject');
         $contact->message = $request->get('message');
 
-        Mail::send(new ContactMail($contact));
-        return response()->json(['message', 'Thanks for contacting us!']);
+        Mail::send(new ContactMail($contact, env('ADMIN_EMAIL')));
+        return response()->json(['message', 'Thanks for contacting!']);
     }
 }

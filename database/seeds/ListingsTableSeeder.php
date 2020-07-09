@@ -348,6 +348,10 @@ class ListingsTableSeeder extends Seeder
         DB::table('listings')->delete();
 
         $data = json_decode($propertyJsonData);
+        $bhks = ['1 RK', '1 BHK', '2 BHK','3 BHK','3+ BHK'];
+        $furnishings = ['Fully Furnished', 'Semi furnished', 'Unfurnished'];
+        $propertyTypes = ['Apartment','Independent house','Independent floor','Studio Duplex','Penthouse','Villa'];
+        
         $i = 0;
         foreach ($data as $obj) {
             // for (let i = 0; i < 20; i++) {
@@ -384,8 +388,11 @@ class ListingsTableSeeder extends Seeder
                 'longitude'  => $longitude,
                 // 'thumbnail'  => $obj->thumbnail,
                 'price'  => $obj->price && $obj->price!= 'false'? (float)$obj->price: 0,
-                'user_id'  => App\User::where('role', 'landlord')->pluck('id')->random(),
-                'category_id' => App\Category::pluck('id')->random()
+                'user_id'  => App\User::where('role', 'agent')->orWhere('role', 'owner')->pluck('id')->random(),
+                'category_id' => App\Category::whereNotIn('name', ['residential', 'commercial'])->pluck('id')->random(),
+                'bhk' => $bhks[array_rand($bhks)],
+                'furnishing' => $furnishings[array_rand($furnishings)],
+                'property_type' => $propertyTypes[array_rand($propertyTypes)],
             ));
             $listing->ratings()->save($rating);
             $i = $i + 1;
