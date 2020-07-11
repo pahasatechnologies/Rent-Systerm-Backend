@@ -43,6 +43,22 @@ class ListingController extends Controller
             $query = $query->where('category_id', $request->query('category'));
         }
 
+        if ($request->query('bhk')) {
+            $query = $query->where('bhk', $request->query('bhk'));
+        }
+
+        if ($request->query('furnishing')) {
+            $query = $query->where('furnishing', $request->query('furnishing'));
+        }
+
+        if ($request->query('property_type')) {
+            $query = $query->where('property_type', $request->query('property_type'));
+        }
+
+        if ($request->query('price')) {
+            $query = $query->whereBetween('price', (explode(',',$request->query('price'))));
+        }
+
         if ($request->query('count')) {
             $paginationCount =  $request->query('count');
         }
@@ -52,6 +68,7 @@ class ListingController extends Controller
 
         $results = $query->paginate($paginationCount);
 
+        // return response()->json(explode(',',$request->query('price')));
         return response()->json(ListingResource::collection($results));
         // return response()->json(ListingResource::collection(Listing::paginate($this->paginateCount)));
     }
@@ -100,6 +117,18 @@ class ListingController extends Controller
 
         if ($request->query('category')) {
             $query = $query->where('category_id', $request->query('category'));
+        }
+
+        if ($request->query('bhk')) {
+            $query = $query->where('bhk', $request->query('bhk'));
+        }
+
+        if ($request->query('furnishing')) {
+            $query = $query->where('furnishing', $request->query('furnishing'));
+        }
+
+        if ($request->query('property_type')) {
+            $query = $query->where('property_type', $request->query('property_type'));
         }
 
         $results = $query->paginate($this->paginateCount);
@@ -217,7 +246,7 @@ class ListingController extends Controller
         return response()->json($listing, 200);
     }
 
-    public function setFeatured(Listing $listing,Request $request)
+    public function setFeatured(Listing $listing, Request $request)
     {
         $status = $request->get('status');
         $listing->is_featured = $status;
@@ -225,7 +254,7 @@ class ListingController extends Controller
         return response()->json($listing, 200);
     }
 
-    public function setActiveStatus(Listing $listing,Request $request)
+    public function setActiveStatus(Listing $listing, Request $request)
     {
         $status = $request->get('status');
         $listing->is_active = $status;
