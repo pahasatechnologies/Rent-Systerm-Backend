@@ -80,6 +80,14 @@ class ListingController extends Controller
         return response()->json(ListingResource::collection($query));
     }
 
+    public function top()
+    {
+        $query = Listing::where('is_featured', true)->take(8)->get();
+
+        return response()->json(ListingResource::collection($query));
+    }
+
+
     public function show($id)
     {
         return response()->json(new ListingResource(\App\Listing::findOrFail($id)));

@@ -60,6 +60,7 @@ Route::group([
 // Route::post('listings', 'Api\ListingController@store');
 
 Route::get('listings/latest_data', 'Api\ListingController@latest')->name('listing.latest');
+Route::get('listings/top_data', 'Api\ListingController@top')->name('listing.top');
 Route::get('listings/search', 'Api\ListingController@search')->name('listings.seach');
 Route::delete('listings/{listing}/remove-file/{id}', 'Api\ListingController@removeFile')->name('listings.removefile');
 Route::get('listings/user-listings', 'Api\ListingController@user_listings')->name('listings.userlistings');
